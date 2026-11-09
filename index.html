@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Двойники — мемори со звёздами, которых все путают</title>
+  <meta name="description" content="Игра на память: найди пары одинаковых фото звёзд, которые похожи друг на друга как две капли воды.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="logo" id="homeBtn" type="button" aria-label="На главную">🎭 Двойники</button>
+    <div class="hud" id="hud" hidden>
+      <span title="Ходы">🔁 <b id="moves">0</b></span>
+      <span title="Время">⏱ <b id="timer">0:00</b></span>
+      <span title="Очки">⭐ <b id="score">0</b></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Стартовый экран -->
+    <section class="screen" id="startScreen">
+      <div class="hero">
+        <h1>Двойники</h1>
+        <p class="lead">Мемори для тех, кто путает Натали Портман с Кирой Найтли.<br>
+          Найди пары <b>одинаковых</b> фото. Подвох в том, что все фото выглядят одинаково.</p>
+      </div>
+
+      <div class="options">
+        <div class="seg" role="radiogroup" aria-label="Сложность" id="levelSeg">
+          <button type="button" role="radio" data-level="easy">Разминка<small>12 карт</small></button>
+          <button type="button" role="radio" data-level="normal" aria-checked="true">Нормально<small>16 карт</small></button>
+          <button type="button" role="radio" data-level="hard">Хардкор<small>24 карты</small></button>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="quizToggle" checked>
+          <span>Угадывать, кто на найденной паре <small>(+50 очков)</small></span>
+        </label>
+      </div>
+
+      <div class="daily" id="daily"></div>
+
+      <h2 class="section-title">Или выбери пару</h2>
+      <div class="pairs" id="pairsList"></div>
+
+      <p class="footnote">Фото с <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> по свободным лицензиям — <a href="credits.html">авторы и лицензии</a>.</p>
+    </section>
+
+    <!-- Игра -->
+    <section class="screen" id="gameScreen" hidden>
+      <div class="game-head">
+        <div class="versus" id="versus"></div>
+        <div class="toast" id="toast" aria-live="polite"></div>
+      </div>
+      <div class="board" id="board"></div>
+    </section>
+
+    <!-- Итоги -->
+    <section class="screen" id="endScreen" hidden>
+      <div class="result">
+        <h2 id="endTitle">Готово!</h2>
+        <p id="endVerdict" class="lead"></p>
+        <div class="stats" id="endStats"></div>
+        <div class="actions">
+          <button type="button" class="btn primary" id="againBtn">Ещё раз</button>
+          <button type="button" class="btn" id="otherBtn">Другая пара</button>
+        </div>
+      </div>
+      <h3 class="section-title">А теперь — кто есть кто</h3>
+      <div class="reveal" id="reveal"></div>
+    </section>
+  </main>
+
+  <!-- Викторина «Кто это?» -->
+  <div class="modal" id="quiz" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+      <img id="quizImg" alt="">
+      <h3 id="quizTitle">Пара! А кто это?</h3>
+      <div class="quiz-options" id="quizOptions"></div>
+      <p class="quiz-feedback" id="quizFeedback"></p>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
